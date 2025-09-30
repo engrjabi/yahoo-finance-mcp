@@ -8,24 +8,24 @@ services:
     container_name: yahoo-finance-mcp-server
     restart: unless-stopped
     ports:
-      - "8080:8080"
+      - "8567:8567"
     environment:
       - PYTHONDONTWRITEBYTECODE=1
       - PYTHONUNBUFFERED=1
       - PYTHONPATH=/app
       - HOST=0.0.0.0
-      - PORT=8080
-    volumes:
+      - PORT=8567
+    # volumes:
       # Optional: Mount source code for development (commented out for production)
       # - .:/app
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:8567/health"]
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 60s
     # MCP Proxy converts stdio MCP server to HTTP/SSE endpoints
     # Available endpoints:
-    # - SSE: http://localhost:8080/sse
-    # - Health: http://localhost:8080/health
+    # - SSE: http://localhost:8567/sse
+    # - Health: http://localhost:8567/health
 

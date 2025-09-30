@@ -5,7 +5,7 @@ set -e
 
 # Configuration
 DEFAULT_HOST="0.0.0.0"
-DEFAULT_PORT="8080"
+DEFAULT_PORT="8567"
 MCP_SERVER_CMD="uv run server.py"
 
 # Parse arguments
