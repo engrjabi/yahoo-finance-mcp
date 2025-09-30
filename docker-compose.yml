@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  yahoo-finance-mcp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: yahoo-finance-mcp-server
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      - PYTHONDONTWRITEBYTECODE=1
+      - PYTHONUNBUFFERED=1
+      - PYTHONPATH=/app
+      - HOST=0.0.0.0
+      - PORT=8080
+    volumes:
+      # Optional: Mount source code for development (commented out for production)
+      # - .:/app
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    # MCP Proxy converts stdio MCP server to HTTP/SSE endpoints
+    # Available endpoints:
+    # - SSE: http://localhost:8080/sse
+    # - Health: http://localhost:8080/health
+
